@@ -115,6 +115,42 @@ footer {
 
 
 /* CHAT.EJS */
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+    color: #4CAF50;
+}
+
+.sidebar-tabs {
+    margin-bottom: 20px;
+}
+
+.sidebar-tab {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.sidebar-tab:hover {
+    background-color: #e0e0e0;
+}
+
 #app {
     display: flex;
     flex-direction: row;
@@ -142,6 +178,8 @@ footer {
     max-height: calc(100vh - 120px);
 }
 
+
+/* Chat Area */
 #chat-container {
     flex: 1;
     padding: 20px;
@@ -153,12 +191,9 @@ footer {
 }
 
 #chat-messages {
-    max-height: calc(100vh - 250px);
+    max-height: calc(100vh - 270px);
     overflow-y: auto;
     padding: 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #chat-input-container {
@@ -196,36 +231,20 @@ footer {
 .chat-message {
     margin-bottom: 10px;
     padding: 10px;
-    border-radius: 5px;
 }
 
 .user-message {
     background-color: #4CAF50;
     color: white;
     align-self: flex-end;
+    text-align: right;
+    border-radius:  5px 5px 0px 5px;
 }
+
 
 .response-message {
-    background-color: #f0f0f0;
-}
-
-@media (max-width: 768px) {
-    #app {
-        flex-direction: column;
-    }
-    #sidebar {
-        width: 100%;
-        padding: 10px;
-        box-shadow: none;
-        border-bottom: 1px solid #ccc;
-    }
-    #chat-container {
-        flex: 1;
-        padding: 10px;
-    }
-    #chat-messages {
-        max-height: calc(100vh - 120px);
-    }
+    background-color: white;
+    border-radius:  5px 5px 5px 0px;
 }
 
 

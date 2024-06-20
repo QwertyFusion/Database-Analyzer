@@ -10,23 +10,22 @@
     <div id="app">
         <div id="sidebar">
             <div class="sidebar-header">
-                <h2>Database</h2>
+                <h2>Data Analyzer</h2>
             </div>
-            <div class="sidebar-content">
-                <table id="databaseTable">
-                    <!-- CSV data will be populated here -->
-                </table>
+            <div class="sidebar-tabs">
+                <a href="/chat" class="sidebar-tab">Chat</a>
+                <a href="/database" class="sidebar-tab">Database</a>
             </div>
         </div>
         <div id="chat-container">
             <div id="chat-header">
-                <h2>Chat</h2>
+                <h2>Query Section</h2>
             </div>
             <div id="chat-messages">
                 <!-- Chat messages will be populated here -->
             </div>
             <div id="chat-input-container">
-                <input type="text" id="chat-input" placeholder="Type your message...">
+                <input type="text" id="chat-input" placeholder="Type your query...">
                 <button id="send-button">Send</button>
             </div>
         </div>

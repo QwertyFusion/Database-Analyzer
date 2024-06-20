@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyzer</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="intro">
+        <h1>Data Analyzer</h1>
+        <p>Welcome to our insight generation tool, where we process and represent your data and give you optimized outputs. Please upload your database and its schema to get started.</p>
+    </div>
+    <div id="container">
+        <div id="error-message" class="error-message"></div>
+        <div class="input-container">
+            <div id="datab" class="input">
+                <label for="databaseFile">Add database file (in .csv format)</label>
+                <input type="file" name="databaseFile" id="databaseFile" required>
+            </div>
+            <div id="schema" class="input">
+                <label for="schemaFile">Add schema (in .json format)</label>
+                <input type="file" name="schemaFile" id="schemaFile" required>
+            </div>
+        </div>
+        <button type="button" id="submit-button">Submit</button>
+    </div>
+    <footer>&copy;Copyright 2024 ChainCoders</footer>
+
+    <script>
+        document.getElementById('databaseFile').addEventListener('change', validateFile);
+        document.getElementById('schemaFile').addEventListener('change', validateFile);
+        document.getElementById('submit-button').addEventListener('click', submitForm);
+
+        function validateFile(event) {
+            const file = event.target.files[0];
+            const fileType = file.type;
+            const fileName = file.name;
+            const allowedTypes = event.target.id === 'databaseFile' ? ['text/csv'] : ['application/json'];
+            const errorMessageDiv = document.getElementById('error-message');
+
+            if (!allowedTypes.includes(fileType)) {
+                errorMessageDiv.textContent = `Invalid file format for ${fileName}. Please upload a valid ${event.target.id === 'databaseFile' ? 'CSV' : 'JSON'} file.`;
+                errorMessageDiv.style.display = 'block';
+            } else {
+                errorMessageDiv.textContent = '';
+                errorMessageDiv.style.display = 'none';
+            }
+        }
+
+        function submitForm() {
+            const databaseFile = document.getElementById('databaseFile').files[0];
+            const schemaFile = document.getElementById('schemaFile').files[0];
+
+            if (!databaseFile || !schemaFile) {
+                const errorMessageDiv = document.getElementById('error-message');
+                errorMessageDiv.textContent = 'Both files are required.';
+                errorMessageDiv.style.display = 'block';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('databaseFile', databaseFile);
+            formData.append('schemaFile', schemaFile);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/chat';
+                } else {
+                    const errorMessageDiv = document.getElementById('error-message');
+                    errorMessageDiv.textContent = data.message;
+                    errorMessageDiv.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                const errorMessageDiv = document.getElementById('error-message');
+                errorMessageDiv.textContent = 'An error occurred while uploading the files. Please try again.';
+                errorMessageDiv.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>

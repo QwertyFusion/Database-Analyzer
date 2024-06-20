@@ -13,19 +13,19 @@
     </div>
     <div id="container">
         <div id="error-message" class="error-message"></div>
-        <form id="upload-form">
+        <div class="input-container">
             <div id="datab" class="input">
-                <label for="databaseFile">Add database file</label>
+                <label for="databaseFile">Add database file (in .csv format)</label>
                 <input type="file" name="databaseFile" id="databaseFile" required>
             </div>
             <div id="schema" class="input">
-                <label for="schemaFile">Add schema</label>
+                <label for="schemaFile">Add schema (in .json format)</label>
                 <input type="file" name="schemaFile" id="schemaFile" required>
             </div>
-            <button type="button" id="submit-button">Submit</button>
-        </form>
+        </div>
+        <button type="button" id="submit-button">Submit</button>
     </div>
-    <footer>&copy; chaincoders</footer>
+    <footer>&copy;Copyright 2024 ChainCoders</footer>
 
     <script>
         document.getElementById('databaseFile').addEventListener('change', validateFile);

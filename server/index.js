@@ -42,6 +42,9 @@ function checkFileType(file, cb) {
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
 // Static folder
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -57,8 +60,18 @@ app.post('/upload', upload, fileValidation, (req, res) => {
     res.json({ success: true });
 });
 
+// Handle the chat page
 app.get('/chat', (req, res) => {
-    res.send('Chat Page - Work in Progress');
+  res.render('chat');
 });
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+// Handle user questions
+app.post('/ask', (req, res) => {
+  const question = req.body.question;
+  console.log('User question:', question);
+
+  // For now, respond with a placeholder answer
+  res.json({ answer: 'This is a demo response. More functionality coming soon!' });
+});
+
+app.listen(port, () => console.log(`Server started on port http://localhost:${port}`));

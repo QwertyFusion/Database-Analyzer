@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyzer - Chat</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Data Analyzer Chat</h1>
+        <div id="chat-box">
+            <div id="messages"></div>
+        </div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Ask a question..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    <footer>&copy;Copyright 2024 ChainCoders</footer>
+
+    <script>
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+
+        function sendMessage() {
+            const input = document.getElementById('user-input').value;
+            if (input.trim() === '') return;
+
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = input;
+            document.getElementById('messages').appendChild(messageDiv);
+
+            fetch('/ask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: input })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseDiv = document.createElement('div');
+                responseDiv.textContent = data.answer;
+                document.getElementById('messages').appendChild(responseDiv);
+            })
+            .catch(error => console.error('Error:', error));
+
+            document.getElementById('user-input').value = '';
+        }
+    </script>
+</body>
+</html>

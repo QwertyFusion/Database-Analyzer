@@ -1,6 +1,7 @@
 # Database-Analyzer
 Run the following commands:
 ```
+npm init -y
 npm install
 npm install express multer ajv ejs csv-parser
 ```

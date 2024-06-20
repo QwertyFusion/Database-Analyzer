@@ -10,23 +10,19 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Set storage engine
-const storage = multer.diskStorage({
-    destination: './server/uploads/',
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
+// Set storage engine to memory storage
+const storage = multer.memoryStorage();
 
 // Initialize upload
 const upload = multer({
-    storage: storage,
-    fileFilter: (req, file, cb) => {
-        checkFileType(file, cb);
-    }
+  storage: storage,
+  limits: { fileSize: 25 * 1024 * 1024 }, // limit file size to 25MB
+  fileFilter: (req, file, cb) => {
+    checkFileType(file, cb);
+  }
 }).fields([
-    { name: 'databaseFile', maxCount: 1 },
-    { name: 'schemaFile', maxCount: 1 }
+  { name: 'databaseFile', maxCount: 1 },
+  { name: 'schemaFile', maxCount: 1 }
 ]);
 
 // Check file type

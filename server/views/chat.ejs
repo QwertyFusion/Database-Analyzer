@@ -3,48 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analyzer - Chat</title>
+    <title>Chat - Data Analyzer</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div id="chat-container">
-        <h1>Data Analyzer Chat</h1>
-        <div id="chat-box">
-            <div id="messages"></div>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <h2>Database</h2>
+            </div>
+            <div class="sidebar-content">
+                <table id="databaseTable">
+                    <!-- CSV data will be populated here -->
+                </table>
+            </div>
         </div>
-        <div id="chat-input">
-            <input type="text" id="user-input" placeholder="Ask a question..." />
-            <button id="send-button">Send</button>
+        <div id="chat-container">
+            <div id="chat-header">
+                <h2>Chat</h2>
+            </div>
+            <div id="chat-messages">
+                <!-- Chat messages will be populated here -->
+            </div>
+            <div id="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
         </div>
     </div>
-    <footer>&copy;Copyright 2024 ChainCoders</footer>
+
+    <%- include('footer') %>
 
     <script>
         document.getElementById('send-button').addEventListener('click', sendMessage);
 
         function sendMessage() {
-            const input = document.getElementById('user-input').value;
-            if (input.trim() === '') return;
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
 
-            const messageDiv = document.createElement('div');
-            messageDiv.textContent = input;
-            document.getElementById('messages').appendChild(messageDiv);
+            if (message) {
+                // Append user message to chat
+                const userMessageElement = document.createElement('div');
+                userMessageElement.className = 'chat-message user-message';
+                userMessageElement.textContent = message;
+                document.getElementById('chat-messages').appendChild(userMessageElement);
 
-            fetch('/ask', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ question: input })
-            })
+                // Clear input
+                input.value = '';
+
+                // Send message to server
+                fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question: message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Append response to chat
+                    const responseMessageElement = document.createElement('div');
+                    responseMessageElement.className = 'chat-message response-message';
+                    responseMessageElement.textContent = data.answer;
+                    document.getElementById('chat-messages').appendChild(responseMessageElement);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+        // Fetch and display CSV data
+        fetch('/get-csv-data')
             .then(response => response.json())
             .then(data => {
-                const responseDiv = document.createElement('div');
-                responseDiv.textContent = data.answer;
-                document.getElementById('messages').appendChild(responseDiv);
+                const table = document.getElementById('databaseTable');
+                data.forEach((row, index) => {
+                    const rowElement = document.createElement('tr');
+                    Object.values(row).forEach(cell => {
+                        const cellElement = document.createElement(index === 0 ? 'th' : 'td');
+                        cellElement.textContent = cell;
+                        rowElement.appendChild(cellElement);
+                    });
+                    table.appendChild(rowElement);
+                });
             })
-            .catch(error => console.error('Error:', error));
-
-            document.getElementById('user-input').value = '';
-        }
+            .catch(error => {
+                console.error('Error fetching CSV data:', error);
+            });
     </script>
 </body>
 </html>

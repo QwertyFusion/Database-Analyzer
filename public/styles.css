@@ -126,30 +126,33 @@ footer {
 
 
 /* Sidebar */
+#app {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
 #sidebar {
     width: 250px;
+    min-width: 250px;
     background-color: #f0f0f0;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-header {
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .sidebar-header h2 {
     color: #4CAF50;
 }
 
-.sidebar-tabs {
-    margin-bottom: 20px;
-}
-
 .sidebar-tab {
     display: block;
     padding: 10px;
-    margin-bottom: 10px;
     border-radius: 5px;
     text-decoration: none;
     color: #333;
@@ -160,65 +163,36 @@ footer {
     background-color: #e0e0e0;
 }
 
-#app {
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-}
-
-#sidebar {
-    width: 250px;
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.sidebar-header h2 {
-    color: #4CAF50;
-}
-
-.sidebar-content {
-    overflow-y: auto;
-    max-height: calc(100vh - 120px);
-}
-
 
 /* Chat Area */
 #chat-container {
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    padding: 20px;
-    padding-bottom: 40px;
+    height: auto;
 }
 
 #chat-header {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: left;
+    padding-left: 20px;
 }
 
 #chat-messages {
     flex: 1;
     display: flex;
     flex-direction: column;
-    max-height: calc(100vh - 270px);
-    overflow-y: auto;
-    padding: 10px;
+    max-height: calc(100vh - 248px);
+    overflow-y: scroll;
+    margin: 20px;
+    margin-right: 0px;
+    padding-right: 20px;
 }
 
 #chat-input-container {
     display: flex;
     align-items: center;
-    position: fixed;
-    bottom: 80px;
-    left: 310px;
-    right: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #chat-input {
@@ -227,7 +201,6 @@ footer {
     border: 3px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
-    overflow: hidden;
 }
 
 #send-button {
@@ -299,15 +272,68 @@ footer {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    padding: 20px;
-    padding-bottom: 40px;
 }
 
 #database-header {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: left;
+    padding-left: 20px;
 }
 
+/* Database Table Format */
+
+/* Table container to allow scrolling */
+#databaseTable {
+    max-height: 80vh;
+    max-width: calc(100vw - 330px);
+    overflow: scroll;
+    margin: 20px 0;
+    margin-left: 20px;
+}
+
+#databaseTable table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+#databaseTable th, #databaseTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#databaseTable th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+}
+
+#databaseTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#databaseTable tr:hover {
+    background-color: #ddd;
+}
+
+#databaseTable td {
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Scrollbar styles */
+#databaseTable::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+#databaseTable::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+#databaseTable::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 /* FOOTER.EJS */
 footer {

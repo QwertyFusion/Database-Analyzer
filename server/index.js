@@ -21,29 +21,25 @@ const upload = multer({
     checkFileType(file, cb);
   }
 }).fields([
-  { name: 'databaseFile', maxCount: 1 },
-  { name: 'schemaFile', maxCount: 1 }
+  { name: 'databaseFile', maxCount: 1 }
 ]);
 
 // Check file type
 function checkFileType(file, cb) {
-    const filetypes = /csv|json/;
+    const filetypes = /csv/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
 
     if (mimetype && extname) {
         return cb(null, true);
     } else {
-        cb('Error: Only CSV and JSON files are allowed!');
+        cb('Error: Only CSV files are allowed!');
     }
 }
 
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
-// Middleware to parse JSON request bodies
-app.use(express.json());
 
 // Static folder
 app.use(express.static(path.join(__dirname, '../public')));
@@ -72,6 +68,15 @@ app.post('/ask', (req, res) => {
 
   // For now, respond with a placeholder answer
   res.json({ answer: 'This is a demo response. More functionality coming soon!' });
+});
+
+// Handle the database page
+app.get('/database', (req, res) => {
+    res.render('database', {  });
+});
+
+app.post('/get-csv-data', (req, res) => {
+  
 });
 
 app.listen(port, () => console.log(`Server started on port http://localhost:${port}`));

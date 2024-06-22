@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database - Data Analyzer</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <h2>Data Analyzer</h2>
+            </div>
+            <div class="sidebar-tabs">
+                <a href="/chat" class="sidebar-tab">Chat</a>
+                <a href="/database" class="sidebar-tab">Database</a>
+            </div>
+        </div>
+        <div id="database-container">
+            <div id="database-header">
+                <h2>Given Database</h2>
+            </div>
+            <div id="databaseTable">
+                <!-- Database table be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') %>
+
+    <script>
+        // Fetch and display CSV data
+        fetch('/get-csv-data')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('databaseTable');
+                data.forEach((row, index) => {
+                    const rowElement = document.createElement('tr');
+                    Object.values(row).forEach(cell => {
+                        const cellElement = document.createElement(index === 0 ? 'th' : 'td');
+                        cellElement.textContent = cell;
+                        rowElement.appendChild(cellElement);
+                    });
+                    table.appendChild(rowElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching CSV data: ', error);
+            });
+    </script>
+</body>
+</html>

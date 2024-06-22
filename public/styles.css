@@ -27,6 +27,16 @@ body {
     display: none;
 }
 
+#success-message {
+    color: #1ead02;
+    background-color: #e6ffe8;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #1ead02;
+    border-radius: 5px;
+    display: none;
+}
+
 #intro {
     text-align: center;
     padding: 20px;
@@ -114,8 +124,6 @@ footer {
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-/* CHAT.EJS */
 
 /* Sidebar */
 #sidebar {
@@ -283,6 +291,21 @@ footer {
 #chat-input-container input:focus {
     outline: none;
     border-color: #4CAF50;
+}
+
+/* Database Area */
+#database-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+    padding-bottom: 40px;
+}
+
+#database-header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 

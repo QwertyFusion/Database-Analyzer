@@ -3,7 +3,7 @@ Run the following commands:
 <br />
 ```
 npm install
-npm install express multer ajv ejs csv-parser
+npm install express multer ejs csv-parser
 ```
 
 To run the server use the commands:

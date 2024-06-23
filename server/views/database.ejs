@@ -20,6 +20,9 @@
         <div id="database-container">
             <div id="database-header">
                 <h2>Uploaded Database</h2>
+                <% if (fileName) { %>
+                    <p>File: <%= fileName %></p>
+                <% } %>
             </div>
             <div id="databaseTable">
                 <table>
@@ -44,6 +47,19 @@
                         <p>No data available</p>
                     <% } %>
                 </table>
+            </div>
+            <div id="pagination">
+                <% if (currentPage > 1) { %>
+                    <a href="/database?page=<%= currentPage - 1 %>">Previous</a>
+                <% } %>
+                <span>Page <%= currentPage %> of <%= totalPages %></span>
+                <form id="pageForm" action="/database" method="get" style="display: inline;">
+                    <input type="number" name="page" id="pageInput" min="1" max="<%= totalPages %>" value="<%= currentPage %>">
+                    <button type="submit">Go</button>
+                </form>
+                <% if (currentPage < totalPages) { %>
+                    <a href="/database?page=<%= currentPage + 1 %>">Next</a>
+                <% } %>
             </div>
         </div>
     </div>

@@ -284,7 +284,7 @@ footer {
 /* Table container to allow scrolling */
 #databaseTable {
     max-height: 80vh;
-    max-width: calc(100vw - 330px);
+    max-width: calc(100vw - 320px);
     overflow: scroll;
     margin: 20px 0;
     margin-left: 20px;
@@ -333,6 +333,79 @@ footer {
 
 #databaseTable::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+/* Pagination */
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0;
+}
+
+#pagination a {
+    margin: 0 10px;
+    padding: 10px 15px;
+    width: 75px;
+    text-align: center;
+    text-decoration: none;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#pagination a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#pagination span {
+    margin: 0 10px;
+    padding: 10px 10px;
+    padding-left: 0px;
+    color: #333;
+}
+
+#pagination form {
+    margin-right: 10px;
+}
+
+#pageForm {
+    display: inline-flex;
+    align-items: center;
+}
+
+#pageInput {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+#pageInput:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+#pageForm button {
+    background-color: #4CAF50;
+    width: 50px;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+#pageForm button:hover {
+    background-color: #45a049;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 /* FOOTER.EJS */

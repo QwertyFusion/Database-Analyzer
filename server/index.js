@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { fileValidation } from './middleware/fileValidation.js';
 import csvParser from 'csv-parser';
 import stream from 'stream';
-import { processQuestion } from './middleware/nlpProcessor.js'; // Add this line
+import { processQuestion } from './middleware/nlpProcessor.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,7 +21,7 @@ app.use(express.json());
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 25 * 1024 * 1024 }, // Limit file size to 25MB
+  limits: { fileSize: 25 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   }
@@ -50,6 +50,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../public')));
 
 let csvData = [];
+let uploadedFileName = '';
 
 // Route for the home page
 app.get('/', (req, res) => res.render('index'));
@@ -62,6 +63,7 @@ app.post('/upload', upload, fileValidation, (req, res) => {
   }
 
   const csvFile = req.files['databaseFile'][0];
+  uploadedFileName = csvFile.originalname;
   const results = [];
 
   // Create a stream from the file buffer
@@ -83,7 +85,30 @@ app.post('/upload', upload, fileValidation, (req, res) => {
     });
 });
 
-// Route for the chat page
+app.get('/database', (req, res) => {
+  let page = parseInt(req.query.page) || 1;
+  const rowsPerPage = 15;
+  const totalRows = csvData.length;
+  const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+  if (page < 1) {
+    page = 1;
+  } else if (page > totalPages) {
+    page = totalPages;
+  }
+
+  const startRow = (page - 1) * rowsPerPage;
+  const endRow = startRow + rowsPerPage;
+  const pageData = csvData.slice(startRow, endRow);
+
+  res.render('database', {
+    csvData: pageData,
+    currentPage: page,
+    totalPages: totalPages,
+    fileName: uploadedFileName
+  });
+});
+
 app.get('/chat', (req, res) => {
   res.render('chat');
 });
@@ -97,11 +122,6 @@ app.post('/ask', (req, res) => {
   const response = processQuestion(question, csvData);
 
   res.json({ answer: response });
-});
-
-// Route for the database page
-app.get('/database', (req, res) => {
-  res.render('database', { csvData });
 });
 
 app.listen(port, () => console.log(`Server started on port http://localhost:${port}`));

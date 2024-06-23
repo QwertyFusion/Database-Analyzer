@@ -1,7 +1,7 @@
 {
   "name": "database-analyzer",
   "version": "1.0.0",
-  "description": "Run the following commands:\r npm init -y\r npm install express multer ajv ejs csv-parser",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {

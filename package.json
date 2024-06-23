@@ -1,7 +1,7 @@
 {
   "name": "database-analyzer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Scanalyst - Database Analyzer",
   "main": "index.js",
   "type": "module",
   "scripts": {

@@ -1,4 +1,4 @@
-# Database-Analyzer
+# SCANALYST - Database Analyzer
 Run the following commands:
 <br />
 ```

@@ -67,7 +67,7 @@ body {
     padding: 20px;
     margin: 10px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, background-color 0.3s;
     flex: 1;
@@ -153,6 +153,7 @@ footer {
 .sidebar-tab {
     display: block;
     padding: 10px;
+    margin-bottom: 5px;
     border-radius: 5px;
     text-decoration: none;
     color: #333;
@@ -160,6 +161,10 @@ footer {
 }
 
 .sidebar-tab:hover {
+    background-color: #e0e0e0;
+}
+
+.hovered{
     background-color: #e0e0e0;
 }
 
@@ -175,6 +180,8 @@ footer {
 #chat-header {
     text-align: left;
     padding-left: 20px;
+    color: white;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
 }
 
 #chat-messages {
@@ -199,7 +206,7 @@ footer {
     flex: 1;
     padding: 10px;
     border: 3px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 16px;
 }
 
@@ -277,17 +284,30 @@ footer {
 #database-header {
     text-align: left;
     padding-left: 20px;
+    color: white;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+#database-name-container > p{
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#database-name-container > p > span{
+    font-weight: bold;
 }
 
 /* Database Table Format */
 
 /* Table container to allow scrolling */
 #databaseTable {
-    max-height: 80vh;
+    max-height: calc(100vh - 285px);
     max-width: calc(100vw - 320px);
     overflow: scroll;
-    margin: 20px 0;
+    margin-top: 20px;
     margin-left: 20px;
+    margin-bottom: 15px;
 }
 
 #databaseTable table {

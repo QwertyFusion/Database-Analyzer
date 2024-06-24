@@ -16,12 +16,19 @@
             <!-- Error message will appear here -->
         </div>
         <div id="success-message" class="success-message">
-            <!-- Error message will appear here -->
+            <!-- Success message will appear here -->
         </div>
         <div class="input-container">
             <div id="datab" class="input">
                 <label for="databaseFile">Add database file (in .csv format)</label>
                 <input type="file" name="databaseFile" id="databaseFile" required>
+                <label for="hasHeaders">Does the CSV file have headers?</label>
+                <input type="checkbox" id="hasHeaders" name="hasHeaders" checked>
+                <div id="customHeaderContainer" class="hidden">
+                    <label for="customHeaders">Provide custom headers (comma-separated)</label>
+                    <p><span class="first-row-showcase">First Row of the uploaded Database:</span><br><span id="csvExample"></span></p>
+                    <input type="text" id="customHeaders" name="customHeaders" placeholder="e.g. id,name,age" autocomplete="off">
+                </div>
             </div>
         </div>
         <button type="button" id="submit-button">Submit</button>
@@ -30,6 +37,8 @@
 
     <script>
         document.getElementById('databaseFile').addEventListener('change', validateFile);
+        document.getElementById('databaseFile').addEventListener('change', showExampleRow);
+        document.getElementById('hasHeaders').addEventListener('change', toggleCustomHeaderInput);
         document.getElementById('submit-button').addEventListener('click', submitForm);
 
         function validateFile(event) {
@@ -53,13 +62,50 @@
             }
         }
 
+        function toggleCustomHeaderInput(event) {
+            const customHeaderContainer = document.getElementById('customHeaderContainer');
+            if (event.target.checked) {
+                customHeaderContainer.classList.add('hidden');
+            } else {
+                customHeaderContainer.classList.remove('hidden');
+            }
+        }
+
+        function showExampleRow(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const lines = e.target.result.split('\n');
+                if (lines.length > 0) {
+                    const exampleRow = lines[0];
+                    document.getElementById('csvExample').textContent = exampleRow;
+                }
+            };
+
+            reader.readAsText(file);
+        }
+
         function submitForm() {
             const databaseFile = document.getElementById('databaseFile').files[0];
+            const hasHeaders = document.getElementById('hasHeaders').checked;
+            const customHeaders = document.getElementById('customHeaders').value;
 
             if (!databaseFile) {
                 const errorMessageDiv = document.getElementById('error-message');
                 errorMessageDiv.textContent = 'Please upload a database file.';
                 errorMessageDiv.style.display = 'block';
+                const successMessageDiv = document.getElementById('success-message');
+                successMessageDiv.textContent = '';
+                successMessageDiv.style.display = 'none';
+                return;
+            }
+
+            if (!hasHeaders &&!customHeaders) {
+                const errorMessageDiv = document.getElementById('error-message');
+                errorMessageDiv.textContent = 'Please provide custom headers when the file does not have headers.';
+                errorMessageDiv.style.display = 'block';
+                const successMessageDiv = document.getElementById('success-message');
                 successMessageDiv.textContent = '';
                 successMessageDiv.style.display = 'none';
                 return;
@@ -67,6 +113,9 @@
 
             const formData = new FormData();
             formData.append('databaseFile', databaseFile);
+            formData.append('hasHeaders', hasHeaders);
+            formData.append('customHeaders', customHeaders);
+
 
             fetch('/upload', {
                 method: 'POST',
@@ -80,6 +129,7 @@
                     const errorMessageDiv = document.getElementById('error-message');
                     errorMessageDiv.textContent = data.message;
                     errorMessageDiv.style.display = 'block';
+                    const successMessageDiv = document.getElementById('success-message');
                     successMessageDiv.textContent = '';
                     successMessageDiv.style.display = 'none';
                 }
@@ -88,6 +138,7 @@
                 const errorMessageDiv = document.getElementById('error-message');
                 errorMessageDiv.textContent = 'An error occurred while uploading the files. Please try again.';
                 errorMessageDiv.style.display = 'block';
+                const successMessageDiv = document.getElementById('success-message');
                 successMessageDiv.textContent = '';
                 successMessageDiv.style.display = 'none';
             });

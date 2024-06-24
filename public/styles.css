@@ -22,7 +22,7 @@ body {
     background-color: #ffe6e6;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ff0000;
+    border: 3px solid #ff0000;
     border-radius: 5px;
     display: none;
 }
@@ -32,7 +32,7 @@ body {
     background-color: #e6ffe8;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #1ead02;
+    border: 3px solid #1ead02;
     border-radius: 5px;
     display: none;
 }
@@ -116,14 +116,72 @@ body {
     transform: translateY(-2px);
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+.hidden {
+    display: none;
 }
 
+.input-container label[for="hasHeaders"] {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.input-container input[type="checkbox"]#hasHeaders {
+    margin-left: 10px;
+    transform: scale(1.2);
+    vertical-align: middle;
+}
+
+#customHeaderContainer {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+#customHeaderContainer:hover {
+    background-color: #f0f0f0;
+}
+
+#customHeaderContainer label[for="customHeaders"] {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.first-row-showcase {
+    color: #555;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+#csvExample {
+    display: block;
+    font-family: monospace;
+    margin-top: 5px;
+    color: #333;
+}
+
+#customHeaders {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+#customHeaders:focus {
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border-color: #4CAF50;
+}
 
 /* Sidebar */
 #app {

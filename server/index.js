@@ -21,7 +21,7 @@ app.use(express.json());
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 25 * 1024 * 1024 },
+  limits: { fileSize: 25 * 1024 * 1024 }, //LIMIT MAX FILE SIZE TO 25 MB
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   }
@@ -65,6 +65,13 @@ app.post('/upload', upload, fileValidation, (req, res) => {
   const csvFile = req.files['databaseFile'][0];
   uploadedFileName = csvFile.originalname;
   const results = [];
+  const hasHeaders = req.body.hasHeaders === 'true';
+  const customHeaders = req.body.customHeaders ? req.body.customHeaders.split(',') : null;
+
+  if (!hasHeaders && customHeaders.length === 0) {
+    // Generate default headers (1, 2, 3, ...)
+    customHeaders = Array.from({ length: csvFile.buffer.byteLength }, (_, i) => `${i + 1}`);
+  }
 
   // Create a stream from the file buffer
   const bufferStream = new stream.PassThrough();
@@ -72,7 +79,7 @@ app.post('/upload', upload, fileValidation, (req, res) => {
 
   // Parse the CSV data
   bufferStream
-    .pipe(csvParser())
+    .pipe(csvParser({ headers: hasHeaders ? null : customHeaders }))
     .on('data', (row) => {
       results.push(row);
     })

@@ -165,6 +165,10 @@ body {
     font-family: monospace;
     margin-top: 5px;
     color: #333;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
 }
 
 #customHeaders {

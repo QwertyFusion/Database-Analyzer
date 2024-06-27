@@ -35,9 +35,8 @@
 
     <script>
         document.getElementById('send-button').addEventListener('click', sendMessage);
-        document.getElementById('chat-input').addEventListener('keydown', function(event){
-            if(event.key === 'Enter' && !event.shiftKey)
-            {
+        document.getElementById('chat-input').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
                 sendMessage();
             }
         });
@@ -67,18 +66,32 @@
                 .then(response => response.json())
                 .then(data => {
                     // Append response to chat
-                    const responseMessageElement = document.createElement('div');
-                    responseMessageElement.className = 'chat-message response-message';
-                    responseMessageElement.textContent = data.answer;
-                    document.getElementById('chat-messages').appendChild(responseMessageElement);
-
-                    // Auto scroll to latest chat
-                    document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+                    handleServerResponse(data);
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
             }
+        }
+
+        function handleServerResponse(response) {
+            const responseMessageElement = document.createElement('div');
+            responseMessageElement.className = 'chat-message response-message';
+
+            if (response && typeof response === 'object') {
+                if (response.answer) {
+                    responseMessageElement.textContent = response.answer;
+                } else if (response.error) {
+                    responseMessageElement.textContent = 'Error: ' + response.error;
+                } else {
+                    responseMessageElement.textContent = 'Unexpected response format';
+                }
+            } else {
+                responseMessageElement.textContent = 'Invalid response from server';
+            }
+
+            document.getElementById('chat-messages').appendChild(responseMessageElement);
+            document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
         }
     </script>
 </body>

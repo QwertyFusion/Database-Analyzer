@@ -7,7 +7,7 @@ npm install express multer ejs csv-parser compromise natural
 npm install axios
 ```
 
-To run the Pyton server use the commands:
+To run the Python server use the commands:
 ```
 python server/api/query.py
 ```

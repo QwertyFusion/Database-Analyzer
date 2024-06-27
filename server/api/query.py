@@ -34,11 +34,13 @@ def handle_question(question, df):
     elif 'dataframe' in question:
         return generate_dataframe_sample(df)
     elif 'top' in question or 'first' in question:
-        return generate_top_5_rows(df)
+        return generate_n_rows(df, n=extract_number(question, default=5), position='top')
     elif 'tail' in question or 'last' in question:
-        return generate_tail_5_rows(df)
+        return generate_n_rows(df, n=extract_number(question, default=5), position='tail')
     elif 'row' in question or 'rows' in question or 'row count' in question or 'number of rows' in question:
         return get_row_count(df)
+    elif 'column names' in question or 'columns name' in question or 'columns names' in question or 'column name' in question:
+        return get_column_names(df)
     elif 'column' in question or 'columns' in question or 'number of columns' in question:
         return get_number_of_columns(df)
     else:
@@ -61,17 +63,20 @@ def generate_scatter_plot(df):
 def generate_dataframe_sample(df):    #correct
     return df.head().to_dict()
 
-def generate_top_5_rows(df):    #correct
-    return df.head().to_dict()
-
-def generate_tail_5_rows(df):   #correct
-    return df.tail().to_dict()
+def generate_n_rows(df, n, position):   #correct
+    if position == 'top':
+        return df.head(n).to_dict()
+    elif position == 'tail':
+        return df.tail(n).to_dict()
 
 def get_row_count(df):      #correct
-    return {'row_count': len(df)}
+    return {'Total number of rows': len(df)}
 
-def get_number_of_columns(df):
-    return {'number_of_columns': df.shape[1]}
+def get_number_of_columns(df):      #correct
+    return {'Total number of columns': df.shape[1]}
+
+def get_column_names(df):     #correct
+    return {'Column names': df.columns.tolist()}
 
 def save_plot_to_base64():
     buf = io.BytesIO()
@@ -80,6 +85,13 @@ def save_plot_to_base64():
     img_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
     plt.close()
     return {'plot': img_base64}
+
+def extract_number(question, default=5):
+    words = question.split()
+    for word in words:
+        if word.isdigit():
+            return int(word)
+    return default
 
 if __name__ == '__main__':
     app.run(port=5000)

@@ -39,8 +39,8 @@ body {
 
 #intro {
     text-align: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    padding: 10px;
+    background: linear-gradient(135deg, #FF4C29, #222831);
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -50,8 +50,10 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    flex: 1;
+    flex: 5;
     flex-direction: column;
+    overflow-y: auto; /* Add vertical scrollbar */
+    max-height: calc(100vh - 230px); /* Adjust to leave space for header and footer */
 }
 
 .input-container {
@@ -187,48 +189,72 @@ body {
     border-color: #4CAF50;
 }
 
+
+
+
+
+
 /* Sidebar */
 #app {
     display: flex;
     flex-direction: row;
     min-height: 100vh;
+    font-family: 'Arial', sans-serif;
 }
 
 #sidebar {
     width: 250px;
     min-width: 250px;
-    background-color: #f0f0f0;
+    background-color: #3E4A61;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
 }
 
 .sidebar-header {
     text-align: center;
+    margin-top: 20px;
 }
 
 .sidebar-header h2 {
-    color: #4CAF50;
+    color: #FFD700;
+    font-size: 24px;
+    margin: 0;
 }
 
 .sidebar-tab {
     display: block;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
     text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s;
+    color: #fff;
+    background-color: #5A6B8C;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.sidebar-tab:hover {
-    background-color: #e0e0e0;
+.sidebar-tab:hover,
+.sidebar-tab.active {
+    background-color: #6C7A99;
+    transform: translateX(5px);
 }
 
-.hovered{
-    background-color: #e0e0e0;
+.sidebar-tab.active {
+    background-color: #FFD700;
+    color: #3E4A61;
 }
+
+.hovered {
+    background-color: #6C7A99;
+}
+
+
+
+
 
 
 /* Chat Area */
@@ -335,6 +361,11 @@ body {
     border-color: #4CAF50;
 }
 
+
+
+
+
+
 /* Database Area */
 #database-container {
     flex: 1;
@@ -402,6 +433,95 @@ body {
     white-space: nowrap;
 }
 
+
+
+
+
+/*  Plot Area   */
+#content {
+    padding: 20px;
+    width: 70%; /* Adjust width as needed */
+    margin: 0 auto; /* Center the content horizontally */
+    background-color: #f0f0f0; /* Light gray background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    overflow-y: auto; /* Add vertical scrollbar */
+    max-height: 500px; /* Limit height and enable scrolling if content exceeds */
+}
+
+#plot-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#plot-header {
+    text-align: left;
+    padding-left: 20px;
+    color: white;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+#content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#plot-form {
+    margin-bottom: 10px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+#plot-form label {
+    display: block;
+    margin-bottom: 3px;
+}
+
+#plot-form select, #plot-form input[type="text"] {
+    width: 100%; /* Adjust width as needed */
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#plot-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#plot-form button:hover {
+    background-color: #0056b3;
+}
+
+#plot-container {
+    margin-top: 10px;
+}
+
+#error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+
+
+
+
+
 /* Scrollbar styles */
 #databaseTable::-webkit-scrollbar {
     width: 12px;
@@ -416,6 +536,11 @@ body {
 #databaseTable::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+
+
+
 
 /* Pagination */
 #pagination {
@@ -490,6 +615,11 @@ body {
     transform: translateY(-2px);
 }
 
+
+
+
+
+
 /* FOOTER.EJS */
 footer {
     text-align: center;
@@ -502,7 +632,42 @@ footer {
     width: 100%;
 }
 
-
 body {
-    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+    -ms-overflow-style: none;
+}
+
+
+
+
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+#plot-container img {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.sidebar-tab {
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.sidebar-tab:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.sidebar-tab:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.sidebar-tab:nth-child(3) {
+    animation-delay: 0.3s;
 }

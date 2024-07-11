@@ -15,6 +15,7 @@
             <div class="sidebar-tabs">
                 <a href="/database" class="sidebar-tab">Database</a>
                 <a href="/chat" class="sidebar-tab hovered">Chat</a>
+                <a href="/plot" class="sidebar-tab hovered-2">Plot</a>
             </div>
         </div>
         <div id="chat-container">
@@ -79,7 +80,13 @@
             responseMessageElement.className = 'chat-message response-message';
 
             if (response && typeof response === 'object') {
-                if (response.answer) {
+                if (response.plot) {
+                    const img = document.createElement('img');
+                    img.src = `data:image/png;base64,${response.plot}`;
+                    responseMessageElement.appendChild(img);
+                } else if (response.dataframe) {
+                    responseMessageElement.textContent = formatDataFrame(response.dataframe);
+                } else if (response.answer) {
                     responseMessageElement.textContent = response.answer;
                 } else if (response.error) {
                     responseMessageElement.textContent = 'Error: ' + response.error;
@@ -92,6 +99,10 @@
 
             document.getElementById('chat-messages').appendChild(responseMessageElement);
             document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+        }
+
+        function formatDataFrame(dataframe) {
+            return dataframe.map(row => JSON.stringify(row)).join('\n');
         }
     </script>
 </body>

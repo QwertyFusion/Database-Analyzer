@@ -8,7 +8,12 @@ npm install axios
 pip install flask pandas seaborn matplotlib scipy
 ```
 
-To run the Python server use the commands:
+To run the Python app server use the commands:
+```
+python server/api/app.py
+```
+
+To run the Python query server use the commands:
 ```
 python server/api/query.py
 ```

@@ -27,11 +27,7 @@ def process():
 
 def handle_question(question, df):
     question = question.strip().lower()
-    if 'line' in question:
-        return generate_line_plot(df)
-    elif 'scatter' in question:
-        return generate_scatter_plot(df)
-    elif 'dataframe' in question:
+    if 'dataframe' in question:
         return generate_dataframe_sample(df)
     elif 'top' in question or 'first' in question:
         return generate_n_rows(df, n=extract_number(question, default=5), position='top')
@@ -43,22 +39,29 @@ def handle_question(question, df):
         return get_column_names(df)
     elif 'column' in question or 'columns' in question or 'number of columns' in question:
         return get_number_of_columns(df)
+    elif 'maximum' in question or 'max' in question:
+        column_name = extract_column_name(question, df)
+        if column_name:
+            return get_max_value(df, column_name)
+        else:
+            return {'error': 'Column name not specified or not found'}
+    elif 'minimum' in question or 'min' in question:
+        column_name = extract_column_name(question, df)
+        if column_name:
+            return get_min_value(df, column_name)
+        else:
+            return {'error': 'Column name not specified or not found'}
+    elif 'plot' in question:
+        return plot(df)
     else:
         return {'error': f'Unhandled question type: {question}'}
 
-def generate_line_plot(df):
-    # Generate a simple line plot
-    plt.figure()
-    sns.lineplot(data=df)
-    return save_plot_to_base64()
 
-def generate_scatter_plot(df):
-    # Generate a simple scatter plot
-    plt.figure()
-    if len(df.columns) < 2:
-        return {'error': 'Scatter plot requires at least 2 columns'}
-    sns.scatterplot(x=df.columns[0], y=df.columns[1], data=df)
-    return save_plot_to_base64()
+response_data = {}
+images = []
+
+def plot(df):
+    return {'error': f'Please go to Plot Section'}
 
 def generate_dataframe_sample(df):    #correct
     return df.head().to_dict()
@@ -78,13 +81,17 @@ def get_number_of_columns(df):      #correct
 def get_column_names(df):     #correct
     return {'Column names': df.columns.tolist()}
 
-def save_plot_to_base64():
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png')
-    buf.seek(0)
-    img_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
-    plt.close()
-    return {'plot': img_base64}
+def get_max_value(df, column_name):   #correct
+    if column_name in df.columns:
+        return {f'Maximum value in {column_name}': df[column_name].max()}
+    else:
+        return {'error': f'Column {column_name} not found'}
+    
+def get_min_value(df, column_name):   #correct
+    if column_name in df.columns:
+        return {f'Minimum value in {column_name}': df[column_name].min()}
+    else:
+        return {'error': f'Column {column_name} not found'}
 
 def extract_number(question, default=5):
     words = question.split()
@@ -92,6 +99,16 @@ def extract_number(question, default=5):
         if word.isdigit():
             return int(word)
     return default
+
+def extract_column_name(question, df):
+    words = question.split()
+    for word in words:
+        # Case-insensitive match
+        for column in df.columns:
+            if word.lower() == column.lower():
+                return column
+    return None
+
 
 if __name__ == '__main__':
     app.run(port=5000)

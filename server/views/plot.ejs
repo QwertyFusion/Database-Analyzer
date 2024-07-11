@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plot - Scanalyst</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <h2>SCANALYST</h2>
+            </div>
+            <div class="sidebar-tabs">
+                <a href="/database" class="sidebar-tab">Database</a>
+                <a href="/chat" class="sidebar-tab">Chat</a>
+                <a href="/plot" class="sidebar-tab">Plot</a>
+            </div>
+        </div>
+        <div id="content">
+            <div id="plot-header">
+                <h2>Plot Section</h2>
+            </div>
+            <form id="plot-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="plot-type">Plot Type:</label>
+                        <select id="plot-type" name="plotType">
+                            <option value="line">1. Line</option>
+                            <option value="bar">2. Bar</option>
+                            <option value="hist">3. Histogram</option>
+                            <option value="scatter">4. Scatter</option>
+                            <option value="box">5. Box</option>
+                            <option value="heatmap">6. Heatmap</option>
+                            <option value="density">7. Density</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="column-name">Column Name:</label>
+                        <input type="text" id="column-name" name="columnName" required>
+                    </div>
+                    <div id="y-column-container" style="display:none;">
+                        <label for="y-column-name">Y Column Name (for scatter):</label>
+                        <input type="text" id="y-column-name" name="yColumnName">
+                    </div>
+                </div>
+                <button type="submit">Generate Plot</button>
+            </form>
+            <div id="plot-container">
+                <!-- Plot will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') %>
+
+    <script>
+        document.getElementById('plot-type').addEventListener('change', function() {
+            if (this.value === 'scatter') {
+                document.getElementById('y-column-container').style.display = 'block';
+            } else {
+                document.getElementById('y-column-container').style.display = 'none';
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const tabs = document.querySelectorAll('.sidebar-tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        document.getElementById('plot-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const plotType = document.getElementById('plot-type').value;
+            const columnName = document.getElementById('column-name').value;
+            const yColumnName = document.getElementById('y-column-name').value;
+
+            fetch('/plot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ plotType, columnName, yColumnName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const plotContainer = document.getElementById('plot-container');
+                plotContainer.innerHTML = '';
+
+                if (data.plot) {
+                    const img = document.createElement('img');
+                    img.src = `data:image/png;base64,${data.plot}`;
+                    plotContainer.appendChild(img);
+                } else if (data.error) {
+                    plotContainer.textContent = 'Error: ' + data.error;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

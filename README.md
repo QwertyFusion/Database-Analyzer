@@ -5,7 +5,7 @@ Run the following commands:
 npm install
 npm install express multer ejs csv-parser compromise natural
 npm install axios
-pip install flask pandas seaborn matplotlib
+pip install flask pandas seaborn matplotlib scipy
 ```
 
 To run the Python server use the commands:

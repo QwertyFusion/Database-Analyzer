@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { fileValidation } from './middleware/fileValidation.js';
 import csvParser from 'csv-parser';
 import stream from 'stream';
+import axios from 'axios';
 import { processQuestion } from './middleware/nlpProcessor.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -116,19 +117,41 @@ app.get('/database', (req, res) => {
   });
 });
 
+app.get('/plot', (req, res) => {
+  res.render('plot');
+});
+
 app.get('/chat', (req, res) => {
   res.render('chat');
 });
 
 // Handle user questions (for the chat functionality)
-app.post('/ask', (req, res) => {
-  const question = req.body.question;
-  console.log('User question:', question);
+app.post('/ask', async (req, res) => {
+    const question = req.body.question;
+    const response = await processQuestion(question, csvData);
+    res.json(response);
+});
 
-  // Process the question with NLP
-  const response = processQuestion(question, csvData);
+// Handle plot requests
+app.post('/plot', async (req, res) => {
+  const { plotType, columnName, yColumnName } = req.body;
 
-  res.json({ answer: response });
+  if (!columnName) {
+    return res.json({ error: 'Column name is required.' });
+  }
+
+  try {
+    const response = await axios.post('http://localhost:5001/plot', {
+      plot_type: plotType,
+      column_name: columnName,
+      y_column_name: yColumnName,
+      data: csvData
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
 });
 
 app.listen(port, () => console.log(`Server started on port http://localhost:${port}`));

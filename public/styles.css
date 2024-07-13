@@ -237,20 +237,16 @@ body {
     font-weight: 500;
 }
 
-.sidebar-tab:hover,
-.sidebar-tab.active {
-    background-color: #6C7A99;
+.sidebar-tab:hover {
+    background-color: #f0009c;
     transform: translateX(5px);
 }
 
 .sidebar-tab.active {
-    background-color: #FFD700;
-    color: #3E4A61;
+    background-color: #06e7e3;
+    color: #1c50b2;
 }
 
-.hovered {
-    background-color: #6C7A99;
-}
 
 
 
@@ -432,6 +428,7 @@ body {
     text-align: left;
     white-space: nowrap;
 }
+
 
 
 

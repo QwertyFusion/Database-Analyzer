@@ -11,20 +11,23 @@ pip install flask pandas numpy seaborn matplotlib scipy
 2. To run the Python app server use the commands:
 ```
 python server/api/app.py
-```
 Python app Server will be started at http://localhost:5001
+```
+    
 
 3. To run the Python query server use the commands:
 ```
 python server/api/query.py
-```
 Python query Server will be started at http://localhost:5000
+```
+
 
 4. To run the Javascript server use the commands:
 ```
 node server/index.js
-```
 Javascript Server will be started at http://localhost:3000
+```
+
 
 # Programming Language Used
   <div align="center">  

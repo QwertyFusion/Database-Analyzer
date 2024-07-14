@@ -60,7 +60,7 @@ def handle_question(question, df):
             return generate_n_rows(df, n=extract_number(question, default=5), position='tail')
         elif 'row' in question or 'rows' in question or 'row count' in question or 'number of rows' in question:
             return get_row_count(df)
-        elif 'column names' in question or 'columns name' in question or 'columns names' in question or 'column name' in question:
+        elif 'column names' in question or 'columns name' in question or 'columns names' in question or 'column name' in question or ('name' in question and 'column' in question) or ('name' in question and 'columns' in question) or ('names' in question and 'column' in question) or ('names' in question and 'columns' in question):
             return get_column_names(df)
         elif 'column' in question or 'columns' in question or 'number of columns' in question:
             return get_number_of_columns(df)

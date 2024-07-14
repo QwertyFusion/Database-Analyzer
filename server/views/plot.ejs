@@ -15,40 +15,44 @@
             <div class="sidebar-tabs">
                 <a href="/database" class="sidebar-tab">Database</a>
                 <a href="/chat" class="sidebar-tab">Chat</a>
-                <a href="/plot" class="sidebar-tab">Plot</a>
+                <a href="/plot" class="sidebar-tab hovered">Plot</a>
             </div>
         </div>
-        <div id="content">
+        <div id="plot-container">
             <div id="plot-header">
                 <h2>Plot Section</h2>
             </div>
-            <form id="plot-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="plot-type">Plot Type:</label>
-                        <select id="plot-type" name="plotType">
-                            <option value="line">1. Line</option>
-                            <option value="bar">2. Bar</option>
-                            <option value="hist">3. Histogram</option>
-                            <option value="scatter">4. Scatter</option>
-                            <option value="box">5. Box</option>
-                            <option value="heatmap">6. Heatmap</option>
-                            <option value="density">7. Density</option>
-                        </select>
+            <div id="plot-body">
+                <form id="plot-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="plot-type">Plot Type:</label>
+                            <div class="select-wrapper">
+                                <select id="plot-type" name="plotType">
+                                    <option value="line">1. Line</option>
+                                    <option value="bar">2. Bar</option>
+                                    <option value="hist">3. Histogram</option>
+                                    <option value="scatter">4. Scatter</option>
+                                    <option value="box">5. Box</option>
+                                    <option value="heatmap">6. Heatmap</option>
+                                    <option value="density">7. Density</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="column-name">Column Name:</label>
+                            <input type="text" id="column-name" name="columnName" required>
+                        </div>
+                        <div id="y-column-container" style="display:none;">
+                            <label for="y-column-name">Y Column Name (for scatter):</label>
+                            <input type="text" id="y-column-name" name="yColumnName">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="column-name">Column Name:</label>
-                        <input type="text" id="column-name" name="columnName" required>
-                    </div>
-                    <div id="y-column-container" style="display:none;">
-                        <label for="y-column-name">Y Column Name (for scatter):</label>
-                        <input type="text" id="y-column-name" name="yColumnName">
-                    </div>
+                    <button type="submit">Generate Plot</button>
+                </form>
+                <div id="plot-viewport">
+                    <!-- Plot will be displayed here -->
                 </div>
-                <button type="submit">Generate Plot</button>
-            </form>
-            <div id="plot-container">
-                <!-- Plot will be displayed here -->
             </div>
         </div>
     </div>
@@ -90,7 +94,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                const plotContainer = document.getElementById('plot-container');
+                const plotContainer = document.getElementById('plot-viewport');
                 plotContainer.innerHTML = '';
 
                 if (data.plot) {

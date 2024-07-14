@@ -3,8 +3,7 @@
 
 ```
 npm install
-npm install express multer ejs csv-parser compromise natural
-npm install axios
+npm install express multer ejs csv-parser compromise natural axios
 pip install flask pandas numpy seaborn matplotlib scipy
 ```
 

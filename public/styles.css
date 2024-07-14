@@ -205,7 +205,7 @@ body {
 #sidebar {
     width: 250px;
     min-width: 250px;
-    background-color: #3E4A61;
+    background-color: #082032;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
@@ -215,11 +215,11 @@ body {
 
 .sidebar-header {
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 0px;
 }
 
 .sidebar-header h2 {
-    color: #FFD700;
+    color: #FF4C29;
     font-size: 24px;
     margin: 0;
 }
@@ -231,20 +231,19 @@ body {
     border-radius: 8px;
     text-decoration: none;
     color: #fff;
-    background-color: #5A6B8C;
+    background-color: #082032;
     transition: background-color 0.3s, transform 0.3s;
     font-size: 16px;
     font-weight: 500;
 }
 
 .sidebar-tab:hover {
-    background-color: #f0009c;
+    background-color: #25303f;
     transform: translateX(5px);
 }
 
-.sidebar-tab.active {
-    background-color: #06e7e3;
-    color: #1c50b2;
+.hovered {
+    background-color: #25303f;
 }
 
 
@@ -259,13 +258,14 @@ body {
     display: flex;
     flex-direction: column;
     height: auto;
+    background-color: #25303f;
 }
 
 #chat-header {
     text-align: left;
     padding-left: 20px;
     color: white;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    background-color: #FF4C29;
 }
 
 #chat-messages {
@@ -289,13 +289,15 @@ body {
 #chat-input {
     flex: 1;
     padding: 10px;
-    border: 3px solid #ccc;
+    border: 3px solid #334756;
+    background-color: #25303f;
     border-radius: 5px;
     font-size: 16px;
+    color: white;
 }
 
 #send-button {
-    background-color: #4CAF50;
+    background-color: #FF4C29;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -307,9 +309,12 @@ body {
 }
 
 #send-button:hover {
-    background-color: #45a049;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+    transform: translateY(2px);
+}
+
+#send-button:active {
+    background-color: #c93d21;
 }
 
 .chat-message {
@@ -321,7 +326,7 @@ body {
 }
 
 .user-message {
-    background-color: #4CAF50;
+    background-color: #FF4C29;
     color: white;
     align-self: flex-end;
     text-align: right;
@@ -335,8 +340,8 @@ body {
 
 
 .response-message {
-    background-color: white;
-    color: black;
+    background-color: #334756;
+    color: white;
     align-self: flex-start;
     text-align: left;
     border-radius:  10px 10px 10px 0px;
@@ -354,12 +359,24 @@ body {
 
 #chat-input-container input:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #FF4C29;
 }
 
+/* Scrollbar Styles */
 
+#chat-messages::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
 
+#chat-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
 
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 
 /* Database Area */
@@ -368,13 +385,15 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color: #25303f;
+    color: white;
 }
 
 #database-header {
     text-align: left;
     padding-left: 20px;
     color: white;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    background: #FF4C29;
 }
 
 #database-name-container > p{
@@ -406,118 +425,28 @@ body {
 }
 
 #databaseTable th, #databaseTable td {
-    border: 1px solid #ddd;
+    border: 2px solid #25303f;
     padding: 8px;
 }
 
 #databaseTable th {
-    background-color: #4CAF50;
+    background-color: #FF4C29;
     color: white;
     text-align: left;
 }
 
 #databaseTable tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #2C394B;
 }
 
 #databaseTable tr:hover {
-    background-color: #ddd;
+    background-color: #4b322c;
 }
 
 #databaseTable td {
     text-align: left;
     white-space: nowrap;
 }
-
-
-
-
-
-
-/*  Plot Area   */
-#content {
-    padding: 20px;
-    width: 70%; /* Adjust width as needed */
-    margin: 0 auto; /* Center the content horizontally */
-    background-color: #f0f0f0; /* Light gray background */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-    overflow-y: auto; /* Add vertical scrollbar */
-    max-height: 500px; /* Limit height and enable scrolling if content exceeds */
-}
-
-#plot-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-#plot-header {
-    text-align: left;
-    padding-left: 20px;
-    color: white;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-}
-
-#content h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-#plot-form {
-    margin-bottom: 10px;
-}
-
-.form-row {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-group {
-    flex: 1;
-    margin-right: 10px;
-}
-
-#plot-form label {
-    display: block;
-    margin-bottom: 3px;
-}
-
-#plot-form select, #plot-form input[type="text"] {
-    width: 100%; /* Adjust width as needed */
-    padding: 8px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-#plot-form button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#plot-form button:hover {
-    background-color: #0056b3;
-}
-
-#plot-container {
-    margin-top: 10px;
-}
-
-#error-message {
-    color: red;
-    margin-top: 10px;
-}
-
-
-
-
-
 
 /* Scrollbar styles */
 #databaseTable::-webkit-scrollbar {
@@ -535,11 +464,7 @@ body {
 }
 
 
-
-
-
-
-/* Pagination */
+/* Database Pagination */
 #pagination {
     display: flex;
     justify-content: center;
@@ -553,22 +478,27 @@ body {
     width: 75px;
     text-align: center;
     text-decoration: none;
-    color: #4CAF50;
-    border: 1px solid #4CAF50;
+    color: #FF4C29;
+    border: 2px solid #FF4C29;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 #pagination a:hover {
-    background-color: #4CAF50;
+    background-color: #FF4C29;
     color: white;
+}
+
+#pagination a:active {
+    background-color: #c93d21;
+    border: 2px solid #c93d21;
 }
 
 #pagination span {
     margin: 0 10px;
     padding: 10px 10px;
     padding-left: 0px;
-    color: #333;
+    color: white;
 }
 
 #pagination form {
@@ -583,7 +513,9 @@ body {
 #pageInput {
     width: 50px;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 3px solid #334756;
+    background-color: #334756;
+    color: white;
     border-radius: 5px;
     text-align: center;
     margin-right: 10px;
@@ -591,11 +523,11 @@ body {
 
 #pageInput:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #FF4C29;
 }
 
 #pageForm button {
-    background-color: #4CAF50;
+    background-color: #FF4C29;
     width: 50px;
     color: white;
     border: none;
@@ -607,10 +539,137 @@ body {
 }
 
 #pageForm button:hover {
-    background-color: #45a049;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+    transform: translateY(2px);
 }
+
+#pageForm button:active {
+    background-color: #c93d21;
+}
+
+
+
+
+
+
+/*  Plot Area   */
+#plot-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #25303f;
+}
+
+#plot-header {
+    text-align: left;
+    padding-left: 20px;
+    color: white;
+    background: #FF4C29;
+}
+
+#plot-body {
+    height: calc(100vh - 190px);
+    overflow-y: scroll;
+    margin: 20px;
+    margin-right: 0px;
+    padding-right: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    width: calc(50% + 20px);
+}
+.form-group {
+    flex: 1;
+    margin-right: 20px;
+}
+
+#plot-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+}
+
+#plot-form select, #plot-form input[type="text"] {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: 3px solid #334756;
+    background-color: #25303f;
+    border-radius: 5px;
+    color: white;
+}
+
+#plot-form select:focus, #plot-form input[type="text"]:focus {
+    outline: none;
+    border-color: #FF4C29;
+}
+
+select > option:hover {
+    background-color: #FF4C29;
+  }
+
+#plot-form button {
+    background-color: #FF4C29;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    margin-bottom: 20px;
+}
+
+#plot-form button:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(2px);
+}
+
+#plot-form button:active {
+    background-color: #c93d21;
+}
+
+#plot-viewport {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+#plot-viewport > img{
+    margin-top: 5%;
+    border: 2px solid #FF4C29;
+    padding: 10px;
+    width: 800px;
+}
+
+/* Scrollbar Styles */
+
+#plot-body::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+#plot-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+#plot-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+
+
 
 
 
@@ -621,7 +680,7 @@ body {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #082032;
     color: white;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -632,9 +691,6 @@ footer {
 body {
     -ms-overflow-style: none;
 }
-
-
-
 
 
 /* Animations */

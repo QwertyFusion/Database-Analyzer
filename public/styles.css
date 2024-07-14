@@ -80,6 +80,9 @@ body {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 }
+.arrow-margin {
+    margin-right: 10px;
+}
 
 #csv-form {
     display: flex;

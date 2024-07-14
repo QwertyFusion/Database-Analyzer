@@ -1,8 +1,8 @@
 <h1>SCANALYST - Database Analyzer</h1>
 <p align="center">
-  <img src="https://github.com/QwertyFusion/Database-Analyzer/images/logo.png" alt="Scanalyst logo"/>
+  <br/>
+  <img src="https://github.com/QwertyFusion/Database-Analyzer/blob/main/public/images/logo.png" alt="Scanalyst logo"/>
 </p>
-<br/>
 <h2>Installation</h2>
 1. Run the following commands for the installation of the requireds libraries:
 
@@ -50,7 +50,7 @@ Click on the link http://localhost:3000 or type it in browser.]
 <h2>License</h2>
 <p>Scanalyst is released under the MIT License. See the <a href="https://github.com/QwertyFusion/Database-Analyzer/blob/main/LICENSE">LICENSE</a> file for more information.</p>
 <br/>
-<h2>Programming Language Used</h2>
+<h2>Programming Languages Used</h2>
   <div align="left">  
     <a href="https://www.w3schools.com/css/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg" alt="CSS3" height="50" /></a>  
     <a href="https://en.wikipedia.org/wiki/HTML5" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg" alt="HTML5" height="50" /></a>  
@@ -65,8 +65,8 @@ Click on the link http://localhost:3000 or type it in browser.]
 <br/>
 <h2>Developers</h2>
 <ul>
-    <li><a href="https://github.com/QwertyFusion">[@QwertyFusion]</a></li>
-    <li><a href="https://github.com/Silent18Killer">[@Silent18Killer]</a></li>
-    <li><a href="https://github.com/AdityaM2205">[@AdityaM2205]</a></li>
-    <li><a href="https://github.com/Apratim23">[@Apratim23]</a></li>
+    <li><a href="https://github.com/QwertyFusion">@QwertyFusion</a></li>
+    <li><a href="https://github.com/Silent18Killer">@Silent18Killer</a></li>
+    <li><a href="https://github.com/AdityaM2205">@AdityaM2205</a></li>
+    <li><a href="https://github.com/Apratim23">@Apratim23</a></li>
 </ul>

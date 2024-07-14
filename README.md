@@ -3,6 +3,15 @@
   <br/>
   <img src="https://github.com/QwertyFusion/Database-Analyzer/blob/main/public/images/logo.png" alt="Scanalyst logo"/>
 </p>
+<h2>Website Preview</h2>
+<p><img src="https://github.com/QwertyFusion/Database-Analyzer/blob/main/preview/home.png" alt="Scanalyst Home Page" width="48%"/>
+<img src="https://github.com/QwertyFusion/Database-Analyzer/blob/main/preview/database.png" alt="Scanalyst Database Page" width="48%"/>
+<img src="https://github.com/QwertyFusion/Database-Analyzer/blob/main/preview/chat.png" alt="Scanalyst Chat Page" width="48%"/>
+<img src="https://github.com/QwertyFusion/Database-Analyzer/blob/main/preview/plot.png" alt="Scanalyst Plot Page" width="48%"/></p>
+<br/>
+<h2>Explanation PPT</h2>
+<p>Here is the link to the explanation ppt. <a href="https://github.com/QwertyFusion/Database-Analyzer/blob/main/ppt/Scanalyst%20-%20Intel%20Unnati.pdf">Click here</a></p>
+<br/>
 <h2>Installation</h2>
 1. Run the following commands for the installation of the requireds libraries:
 

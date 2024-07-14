@@ -8,30 +8,35 @@
 </head>
 <body>
     <div id="intro">
-        <h1>SCANALYST - Database Analyzer</h1>
-        <p>Welcome to our insight generation tool, where we process and analyze your data to give you optimized answers to your queries.<br> Please upload your database to get started.</p>
+        <h1>SCANALYST</h1>
     </div>
     <div id="container">
-        <div id="error-message" class="error-message">
-            <!-- Error message will appear here -->
+        <div id="description-box">
+            <h2>📈 Database Analyzer</h2>
+            <p>Our insight generation tool can process and analyze your data to give optimized answers to your queries.<br><br>Please upload your database to get started. <i class="arrow right"></i><i class="arrow right"></i></p>
         </div>
-        <div id="success-message" class="success-message">
-            <!-- Success message will appear here -->
-        </div>
-        <div class="input-container">
-            <div id="datab" class="input">
-                <label for="databaseFile">Add database file (in .csv format)</label>
-                <input type="file" name="databaseFile" id="databaseFile" required>
-                <label for="hasHeaders">Does the CSV file have headers?</label>
-                <input type="checkbox" id="hasHeaders" name="hasHeaders" checked>
-                <div id="customHeaderContainer" class="hidden">
-                    <label for="customHeaders">Provide custom headers (comma-separated)</label>
-                    <p><span class="first-row-showcase">First Row of the uploaded Database:</span><br><span id="csvExample"></span></p>
-                    <input type="text" id="customHeaders" name="customHeaders" placeholder="e.g. id,name,age" autocomplete="off">
+        <div id="csv-form">
+            <div id="error-message" class="error-message">
+                <!-- Error message will appear here -->
+            </div>
+            <div id="success-message" class="success-message">
+                <!-- Success message will appear here -->
+            </div>
+            <div class="input-container">
+                <div id="datab" class="input">
+                    <label for="databaseFile">Add database file (in .csv format)</label>
+                    <input type="file" name="databaseFile" id="databaseFile" required>
+                    <label for="hasHeaders">Does the CSV file have headers?</label>
+                    <input type="checkbox" id="hasHeaders" name="hasHeaders" checked>
+                    <div id="customHeaderContainer" class="hidden">
+                        <label for="customHeaders">Provide custom headers (comma-separated)</label>
+                        <p><span class="first-row-showcase">First Row of the uploaded Database:</span><br><span id="csvExample"></span></p>
+                        <input type="text" id="customHeaders" name="customHeaders" placeholder="e.g. id,name,age" autocomplete="off">
+                    </div>
                 </div>
             </div>
+            <button type="button" id="submit-button">Submit</button>
         </div>
-        <button type="button" id="submit-button">Submit</button>
     </div>
     <%- include('footer') %>
 

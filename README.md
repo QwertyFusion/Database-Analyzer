@@ -35,7 +35,7 @@ node server/index.js
 [Note: Javascript Server will be started at http://localhost:3000]
 ```
 
-4. Finally, head over to the JavaScript server localhost page on any browser:
+5. Finally, head over to the JavaScript server localhost page on any browser:
 ```
 Click on the link http://localhost:3000 or type it in browser.]
 ```

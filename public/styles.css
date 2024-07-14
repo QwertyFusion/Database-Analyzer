@@ -276,6 +276,12 @@ body {
     margin: 0;
 }
 
+.sidebar-header img {
+    width: 15rem;
+    margin: 0;
+    margin-top: 10px;
+}
+
 .sidebar-tab {
     display: block;
     padding: 12px 15px;

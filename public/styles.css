@@ -1,4 +1,4 @@
-/* INDEX.EJS */
+/* Home Page */
 
 body, h1, p, label, input, button, footer {
     margin: 0;
@@ -42,9 +42,14 @@ body {
 #intro {
     text-align: center;
     padding: 20px;
+    padding-bottom: 15px;
+    padding-top: 25px;
     background-color: #FF4C29;
-    color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#intro > img {
+    height: 41px;
 }
 
 #container {
@@ -57,6 +62,7 @@ body {
     overflow-y: auto;
     max-height: calc(100vh - 198px);
 }
+
 #description-box {
     max-width: 400px;
     padding: 20px;
@@ -65,6 +71,7 @@ body {
     font-size: large;
     float: left;
 }
+
 #description-box > h2 {
     color: #FF4C29;
 }
@@ -80,6 +87,7 @@ body {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 }
+
 .arrow-margin {
     margin-right: 10px;
 }
@@ -227,6 +235,7 @@ body {
     border-color: #FF4C29;
 }
 
+
 /* Scrollbar Styles */
 
 #container::-webkit-scrollbar {
@@ -242,8 +251,6 @@ body {
 #container::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-
-
 
 
 /* Sidebar */
@@ -305,9 +312,37 @@ body {
 }
 
 
+/* Sidebar Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
+#plot-container img {
+    animation: fadeIn 0.5s ease-in-out;
+}
 
+.sidebar-tab {
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.sidebar-tab:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.sidebar-tab:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.sidebar-tab:nth-child(3) {
+    animation-delay: 0.3s;
+}
 
 
 /* Chat Area */
@@ -465,8 +500,6 @@ body {
 }
 
 /* Database Table Format */
-
-/* Table container to allow scrolling */
 #databaseTable {
     max-height: calc(100vh - 285px);
     max-width: calc(100vw - 320px);
@@ -606,11 +639,7 @@ body {
 }
 
 
-
-
-
-
-/*  Plot Area   */
+/*  Plot Page   */
 #plot-container {
     flex: 1;
     display: flex;
@@ -725,16 +754,7 @@ select > option:hover {
 }
 
 
-
-
-
-
-
-
-
-
-
-/* FOOTER.EJS */
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;
@@ -744,41 +764,4 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-}
-
-body {
-    -ms-overflow-style: none;
-}
-
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideIn {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-#plot-container img {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.sidebar-tab {
-    animation: slideIn 0.5s ease forwards;
-    opacity: 0;
-}
-
-.sidebar-tab:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.sidebar-tab:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.sidebar-tab:nth-child(3) {
-    animation-delay: 0.3s;
 }

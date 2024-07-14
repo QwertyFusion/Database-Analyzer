@@ -74,8 +74,8 @@ Click on the link http://localhost:3000 or type it in browser.]
 <br/>
 <h2>Developers</h2>
 <ul>
-    <li><a href="https://github.com/QwertyFusion">@QwertyFusion</a></li>
-    <li><a href="https://github.com/Silent18Killer">@Silent18Killer</a></li>
-    <li><a href="https://github.com/AdityaM2205">@AdityaM2205</a></li>
-    <li><a href="https://github.com/Apratim23">@Apratim23</a></li>
+    <li><a href="https://github.com/QwertyFusion">QwertyFusion</a></li>
+    <li><a href="https://github.com/Silent18Killer">Silent18Killer</a></li>
+    <li><a href="https://github.com/AdityaM2205">AdityaM2205</a></li>
+    <li><a href="https://github.com/Apratim23">Apratim23</a></li>
 </ul>
